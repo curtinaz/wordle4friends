@@ -3,9 +3,14 @@ import { onUnmounted } from 'vue'
 import { getWordOfTheDay, allWords } from './words'
 import Keyboard from './Keyboard.vue'
 import { LetterState } from './types'
+import { Word } from '@andsfonseca/palavras-pt-br';
 
 // Get word of the day
 const answer = getWordOfTheDay()
+
+function isValidWord(word: string): boolean {
+  return Word.checkValid(word);
+}
 
 // Board state. Each tile is represented as { letter, state }
 const board = $ref(
@@ -73,9 +78,9 @@ function clearTile() {
 function completeRow() {
   if (currentRow.every((tile) => tile.letter)) {
     const guess = currentRow.map((tile) => tile.letter).join('')
-    if (!allWords.includes(guess) && guess !== answer) {
+    if (!isValidWord(guess) && guess !== answer) {
       shake()
-      showMessage(`Not in word list`)
+      showMessage(`Palavra não encontrada!`)
       return
     }
 
@@ -179,13 +184,7 @@ function genResultGrid() {
     </div>
   </Transition>
   <header>
-    <h1>VVORDLE</h1>
-    <a
-      id="source-link"
-      href="https://github.com/yyx990803/vue-wordle"
-      target="_blank"
-      >Source</a
-    >
+    <h1>Jogo de Palavras</h1>
   </header>
   <div id="board">
     <div
