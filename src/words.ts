@@ -1,16 +1,17 @@
-const defaultMessage = ' Using word of the day instead.'
+const defaultMessage = ' A palavra do dia será utilizada.'
 
 export function getWordOfTheDay() {
-  if (location.search) {
+  const params = new URLSearchParams(location.search)
+  if (params.get("word")) {
     try {
-      const query = atob(location.search.slice(1))
-      if (query.length !== 5) {
-        alert(`Incorrect word length from encoded query. ${defaultMessage}`)
+      const query = atob(params.get("word") ?? "")
+      if (query.length > 8 || query.length < 3) {
+        alert(`A palavra deve conter no mínimo 3 e no máximo 8 letras. ${defaultMessage}`)
       } else {
         return query
       }
     } catch (e) {
-      alert(`Malformed encoded word query. ${defaultMessage}`)
+      alert(`A palavra não está codifica corretamente. ${defaultMessage}`)
     }
   }
 

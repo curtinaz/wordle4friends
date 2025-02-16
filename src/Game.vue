@@ -16,13 +16,16 @@ function isValidWord(word: string): boolean {
 
 // Board state. Each tile is represented as { letter, state }
 const board = $ref(
-  Array.from({ length: 6 }, () =>
-    Array.from({ length: 5 }, () => ({
+  Array.from({ length: answer.length + 1 }, () =>
+    Array.from({ length: answer.length }, () => ({
       letter: '',
       state: LetterState.INITIAL
     }))
   )
 )
+
+const numberOfRows = answer.length + 1;
+const numberOfTiles = answer.length;
 
 
 // Current active row.
@@ -189,7 +192,7 @@ function genResultGrid() {
   <header>
     <h1>Jogo de Palavras</h1>
   </header>
-  <div id="board">
+  <div id="board" :style="[`grid-template-rows: repeat(${numberOfRows}, 1fr)`]">
     <div
       v-for="(row, index) in board"
       :class="[
@@ -197,6 +200,7 @@ function genResultGrid() {
         shakeRowIndex === index && 'shake',
         success && currentRowIndex === index && 'jump'
       ]"
+      :style="[`grid-template-columns: repeat(${numberOfTiles}, 1fr)`]"
     >
       <div
         v-for="(tile, index) in row"
