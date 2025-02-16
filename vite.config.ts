@@ -5,5 +5,9 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue({
     reactivityTransform: true
-  })]
+  })],
+  base: './', // Define caminhos relativos,
+  build: {
+    outDir: 'docs', // Define a pasta de saída para 'docs'
+  },
 })
