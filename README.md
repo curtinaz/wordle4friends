@@ -1,4 +1,4 @@
-# # Wordle4Friends
+# Wordle4Friends
 
 Para jogar, [Clique aqui](https://curtinaz.github.io/wordle4friends/)
 
