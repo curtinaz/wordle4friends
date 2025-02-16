@@ -3,7 +3,9 @@ import { onUnmounted } from 'vue'
 import { getWordOfTheDay, allWords } from './words'
 import Keyboard from './Keyboard.vue'
 import { LetterState } from './types'
-import { Word } from '@andsfonseca/palavras-pt-br';
+import { Word, PYTHONPROBR } from '@andsfonseca/palavras-pt-br';
+
+Word.library = PYTHONPROBR;
 
 // Get word of the day
 const answer = getWordOfTheDay()
@@ -21,6 +23,7 @@ const board = $ref(
     }))
   )
 )
+
 
 // Current active row.
 let currentRowIndex = $ref(0)
@@ -118,7 +121,7 @@ function completeRow() {
       setTimeout(() => {
         grid = genResultGrid()
         showMessage(
-          ['Genius', 'Magnificent', 'Impressive', 'Splendid', 'Great', 'Phew'][
+          ['Genio!', 'Maguinífico', 'Impressionante', 'Explendido', 'Boa', 'Quase'][
             currentRowIndex
           ],
           -1
@@ -139,7 +142,7 @@ function completeRow() {
     }
   } else {
     shake()
-    showMessage('Not enough letters')
+    showMessage('Letras insuficientes')
   }
 }
 
