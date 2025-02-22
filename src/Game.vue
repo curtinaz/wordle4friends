@@ -11,7 +11,7 @@ Word.library = PYTHONPROBR;
 const answer = getWordOfTheDay()
 
 function isValidWord(word: string): boolean {
-  return Word.checkValid(word);
+  return Word.checkValid(word, 0, true);
 }
 
 // Board state. Each tile is represented as { letter, state }
@@ -124,7 +124,7 @@ function completeRow() {
       setTimeout(() => {
         grid = genResultGrid()
         showMessage(
-          ['Genio!', 'Maguinífico', 'Impressionante', 'Explendido', 'Boa', 'Quase'][
+          ['Genio!', 'Magnífico', 'Impressionante', 'Explendido', 'Boa', 'Quase'][
             currentRowIndex
           ],
           -1
